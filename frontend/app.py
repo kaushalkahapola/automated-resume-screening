@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import json
 
 st.title("Resume Scoring Application")
 
@@ -11,7 +10,7 @@ job_title = st.text_input("Job Title")
 job_skills = st.text_input("Job Skills (comma-separated)")
 
 # File uploader for resume
-uploaded_file = st.file_uploader("Upload Resume", type=["txt"])
+uploaded_file = st.file_uploader("Upload Resume", type=["txt", "pdf"])
 
 if st.button("Score Resume"):
     if not job_title or not job_skills or not uploaded_file:
@@ -23,10 +22,9 @@ if st.button("Score Resume"):
         }
 
         files = {
-            'file': uploaded_file.getvalue()
+            'file': (uploaded_file.name, uploaded_file.getvalue(), uploaded_file.type)
         }
 
-        # Correctly format the data to be sent as query parameters
         params = {
             "title": job_title,
             "skills": job_skills.split(",")
