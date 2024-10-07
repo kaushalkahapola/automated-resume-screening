@@ -68,6 +68,7 @@
 from fastapi import FastAPI
 import os
 from dotenv import load_dotenv
+import fastapi.middleware.cors as cors
 
 # Load environment variables from .env file
 load_dotenv()
@@ -77,6 +78,14 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Initialize FastAPI app
 app = FastAPI()
+
+app.add_middleware(
+    cors.CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
