@@ -2,7 +2,7 @@
     "builds": [
       {
         "src": "/backend/main.py",
-        "use": "@vercel/python"
+        "use": "@now/python"
       }
     ],
     "routes": [
