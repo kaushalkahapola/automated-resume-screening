@@ -7,7 +7,7 @@ from typing import List
 
 router = APIRouter()
 
-@router.post("/upload_resume/")
+@router.post("/upload_resume")
 async def upload_resume(
     title: str = Form(...),
     skills: str = Form(...),
@@ -24,7 +24,7 @@ async def upload_resume(
     resume_embeddings = [generate_embedding(resume_text) for resume_text in resume_texts]
     
     # Generate embedding for the job description
-    job_desc_embedding = generate_embedding(job_desc.title + " " + " ".join(job_desc.skills) + " " + job_desc.description)
+    job_desc_embedding = generate_embedding(job_desc.title + " " + " ".join(job_desc.skills))
     
     # Get filenames
     filenames = [file.filename for file in files]
